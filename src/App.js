@@ -27,7 +27,7 @@ function App() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-const API_BASE_URL = "https://hugic.onrender.com";
+const API_BASE_URL = "https://uniq-hinged-1.onrender.com";
 
 const handleSubmit = async (e) => {
   e.preventDefault();
