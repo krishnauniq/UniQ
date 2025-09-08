@@ -30,7 +30,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://127.0.0.1:5000/predict", formData);
+      const res = await axios.post("https://huge-1.onrender.com/predict", formData);
       setResult(res.data.recommended_crop);
     } catch (err) {
       console.error(err);
