@@ -3,16 +3,18 @@ import axios from "axios";
 import "./Chatbot.css";
 import { MessageCircle } from "lucide-react";
 
+const API_BASE_URL = "https://uniq-hinged-1.onrender.com"; // ✅ Updated backend URL
+
 function Chatbot() {
   const [messages, setMessages] = useState([
     { text: "👋 Hi! I’m your Crop Assistant. Ask me anything.", sender: "bot" }
   ]);
   const [input, setInput] = useState("");
-  const [open, setOpen] = useState(false); // toggle chat
-  const [loading, setLoading] = useState(false); // show "Thinking..."
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const chatEndRef = useRef(null);
 
-  // Auto-scroll to bottom
+  // Auto-scroll
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
@@ -36,7 +38,8 @@ function Chatbot() {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://127.0.0.1:5000/chat", { message: trimmedInput });
+      // ✅ Updated API URL
+      const res = await axios.post(`${API_BASE_URL}/chat`, { message: trimmedInput });
       const botReply = res.data.reply?.trim() || "🤔 Sorry, I couldn’t find an answer.";
       setMessages([...newMessages, { text: botReply, sender: "bot" }]);
     } catch (err) {
@@ -71,12 +74,10 @@ function Chatbot() {
               </div>
             ))}
 
-            {/* Typing indicator */}
             {loading && <div className="chat-message bot">⏳ Thinking...</div>}
             <div ref={chatEndRef} />
           </div>
 
-          {/* Input */}
           <div className="chat-input">
             <input
               value={input}
