@@ -30,7 +30,8 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://huge-1.onrender.com/predict", formData);
+      // ✅ Using only hugic backend
+      const res = await axios.post("https://hugic.onrender.com/predict", formData);
       setResult(res.data.recommended_crop);
     } catch (err) {
       console.error(err);
@@ -38,8 +39,6 @@ function App() {
     }
   };
 
-  // ✅ Removed unused options for aspect and soil
-  
   const toggleFormVisibility = () => {
     const isFormCurrentlyHidden = !showForm;
     setShowForm(isFormCurrentlyHidden);
