@@ -27,17 +27,19 @@ function App() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      // ✅ Using only hugic backend
-      const res = await axios.post("https://hugic.onrender.com/predict", formData);
-      setResult(res.data.recommended_crop);
-    } catch (err) {
-      console.error(err);
-      alert("⚠️ Error while fetching crop recommendation");
-    }
-  };
+const API_BASE_URL = "https://hugic.onrender.com";
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await axios.post(`${API_BASE_URL}/predict`, formData);
+    setResult(res.data.recommended_crop);
+  } catch (err) {
+    console.error(err);
+    alert("⚠️ Error while fetching crop recommendation");
+  }
+};
+
 
   const toggleFormVisibility = () => {
     const isFormCurrentlyHidden = !showForm;
